@@ -13,7 +13,7 @@ use Inertia\Response;
 class ConfirmablePasswordController extends Controller
 {
     /**
-     * Show the confirm password page.
+     * Show the confirmation password page.
      */
     public function show(): Response
     {
