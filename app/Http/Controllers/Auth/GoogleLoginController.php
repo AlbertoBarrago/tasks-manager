@@ -27,7 +27,7 @@ class GoogleLoginController extends Controller
      * @return RedirectResponse
      */
     public function handleGoogleCallback(): RedirectResponse
-    {
+    {:
         $googleUser = null;
         try {
             $googleUser = Socialite::driver('google')->user();
@@ -40,6 +40,13 @@ class GoogleLoginController extends Controller
             $existingUserByEmail = User::where('email', $googleUser->getEmail())->first();
 
             if ($existingUserByEmail) {
+                $userAttributes = $existingUserByEmail->toArray();
+                $allKeys = array_keys($userAttributes);
+
+                #dd($allKeys);
+
+                Log::debug('Keys for existingUserByEmail:', ['keys' => $allKeys]);
+
                 if (empty($existingUserByEmail->google_id)) {
                     $existingUserByEmail->google_id = $googleUser->getId();
                     $existingUserByEmail->google_token = $googleUser->token;
@@ -47,8 +54,9 @@ class GoogleLoginController extends Controller
                     $existingUserByEmail->save();
 
                     Auth::login($existingUserByEmail, true);
-                    Log::info('Existing user by email linked with Google ID and logged in.', ['user_id' => $existingUserByEmail->id, 'email' => $existingUserByEmail->email]);
-                    return redirect()->intended('/home');
+                    Log::info('Existing user by email linked with Google ID and logged in.', ['user_id' =>
+                        $existingUserByEmail->id, 'email' => $existingUserByEmail->email]);
+                    return redirect()->intended('/dashboard');
 
                 } elseif ($existingUserByEmail->google_id === $googleUser->getId()) {
                     $existingUserByEmail->name = $googleUser->getName();
@@ -57,8 +65,9 @@ class GoogleLoginController extends Controller
                     $existingUserByEmail->save();
 
                     Auth::login($existingUserByEmail, true);
-                    Log::info('Existing user by email and matching Google ID logged in.', ['user_id' => $existingUserByEmail->id, 'email' => $existingUserByEmail->email]);
-                    return redirect()->intended('/home');
+                    Log::info('Existing user by email and matching Google ID logged in.', ['user_id' =>
+                        $existingUserByEmail->id, 'email' => $existingUserByEmail->email]);
+                    return redirect()->intended('/dashboard');
 
                 } else {
                     Log::warning('Google login email conflict: existing user email is linked to a different Google ID.', [
@@ -67,7 +76,8 @@ class GoogleLoginController extends Controller
                         'existing_google_id' => $existingUserByEmail->google_id,
                         'new_google_id' => $googleUser->getId(),
                     ]);
-                    return redirect('/login')->with('error', 'This email address is already associated with a different Google account. Please log in with the correct Google account or use your password if you have one.');
+                    return redirect('/login')->with('error', 'This email address is already associated with a different Google account.
+                    Please log in with the correct Google account or use your password if you have one.');
                 }
             } else {
                 $user = User::updateOrCreate(
@@ -83,7 +93,8 @@ class GoogleLoginController extends Controller
                 );
 
                 Auth::login($user, true);
-                Log::info('User found/created by google_id and logged in.', ['user_id' => $user->id, 'email' => $user->email, 'was_recently_created' => $user->wasRecentlyCreated]);
+                Log::info('User found/created by google_id and logged in.',
+                    ['user_id' => $user->id, 'email' => $user->email, 'was_recently_created' => $user->wasRecentlyCreated]);
 
 
                 if (!Auth::check()) { // Should not happen if Auth::login was successful
