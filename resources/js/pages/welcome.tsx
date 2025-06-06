@@ -41,6 +41,7 @@ export default function Welcome() {
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
                       <h1 className="text-3xl text-white m-auto antialiased">Im a nice h1 dude!</h1>
+                        {/*TODO: here add some text*/}
                     </main>
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>
