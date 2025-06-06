@@ -47,10 +47,13 @@ class GoogleLoginController extends Controller
 
                 Log::debug('Keys for existingUserByEmail:', ['keys' => $allKeys]);
 
+                $userAvatar = $googleUser -> getAvatar();
+
                 if (empty($existingUserByEmail->google_id)) {
                     $existingUserByEmail->google_id = $googleUser->getId();
                     $existingUserByEmail->google_token = $googleUser->token;
                     $existingUserByEmail->google_refresh_token = $googleUser->refreshToken;
+                    $existingUserByEmail->avatar = $userAvatar();
                     $existingUserByEmail->save();
 
                     Auth::login($existingUserByEmail, true);
@@ -62,6 +65,7 @@ class GoogleLoginController extends Controller
                     $existingUserByEmail->name = $googleUser->getName();
                     $existingUserByEmail->google_token = $googleUser->token;
                     $existingUserByEmail->google_refresh_token = $googleUser->refreshToken;
+                    $existingUserByEmail->avatar = $userAvatar();
                     $existingUserByEmail->save();
 
                     Auth::login($existingUserByEmail, true);
@@ -87,8 +91,11 @@ class GoogleLoginController extends Controller
                     [
                         'name' => $googleUser->getName(),
                         'email' => $googleUser->getEmail(),
-                        'google_token' => $googleUser->token,
                         'password' => $this->generateUserPassword($googleUser->getEmail()),
+                        'google_token' => $googleUser->token,
+                        'google_refresh_token' => $googleUser->refreshToken,
+                        'email_verified_at' => now(),
+                        'avatar' => $googleUser->getAvatar(),
                     ]
                 );
 
