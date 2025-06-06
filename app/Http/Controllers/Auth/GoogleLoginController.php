@@ -27,7 +27,7 @@ class GoogleLoginController extends Controller
      * @return RedirectResponse
      */
     public function handleGoogleCallback(): RedirectResponse
-    {:
+    {
         $googleUser = null;
         try {
             $googleUser = Socialite::driver('google')->user();
