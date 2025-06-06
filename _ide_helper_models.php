@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Models;
+// @formatter:off
+// phpcs:ignoreFile
+/**
+ * A helper file for your Eloquent Models
+ * Copy the phpDocs from this file to the correct Model,
+ * And remove them from this file, to prevent double declarations.
+ *
+ * @author Barry vd. Heuvel <barryvdh@gmail.com>
+ */
 
-use Eloquent;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Carbon;
 
+namespace App\Models{
+    use Carbon\Carbon;
+    use Eloquent;
 /**
  *
  *
@@ -36,45 +44,6 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class User extends Authenticatable
-{
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'google_id',
-        'google_token',
-        'google_refresh_token',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'google_token',
-        'google_refresh_token',
-    ];
-
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+	class User extends \Eloquent {}
 }
+

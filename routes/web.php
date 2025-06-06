@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\GoogleLoginController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -13,5 +14,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+Route::get('auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+
+
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';

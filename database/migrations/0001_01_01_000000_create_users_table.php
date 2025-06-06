@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('google_id')->nullable();
+            $table->string('google_token')->nullable();
+            $table->string('google_refresh_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -45,5 +48,13 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['google_id', 'google_token', 'google_refresh_token']);
+            // If you changed password to nullable, revert it if necessary
+            // $table->string('password')->nullable(false)->change();
+        });
     }
 };
+
+
