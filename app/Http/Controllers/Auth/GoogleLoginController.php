@@ -101,7 +101,7 @@ class GoogleLoginController extends Controller
                     Log::error('User was not logged in successfully after Google callback (post-email check).', ['user_id' => $user->id]);
                     return redirect('/login')->with('error', 'Login failed after Google authentication.');
                 }
-                return redirect()->intended('/home');
+                return redirect()->intended('/dashboard');
             }
 
         } catch (QueryException $e) {

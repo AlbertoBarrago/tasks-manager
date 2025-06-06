@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Tests\Feature\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -18,7 +18,7 @@ use Laravel\Socialite\Two\InvalidStateException;
 use GuzzleHttp\Exception\ClientException;
 
 
-class GoogleLoginController extends Controller
+class GoogleAuthenticationTest extends Controller
 {
     /**
      * Redirect the user to the Google authentication page.
