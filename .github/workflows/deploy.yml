@@ -1,0 +1,50 @@
+name: Deploy to Laravel Cloud on Tag
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  deploy:
+    name: Deploy Release to Laravel Cloud
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, xml, curl, zip, pcntl, gd, bcmath
+          tools: composer
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install Laravel Cloud CLI
+        run: composer global require laravel/cloud
+
+      - name: Authenticate with Laravel Cloud
+        run: laravel-cloud login --token=${{ secrets.LARAVEL_CLOUD_API_TOKEN }}
+        env:
+          LARAVEL_CLOUD_API_TOKEN: ${{ secrets.LARAVEL_CLOUD_API_TOKEN }}
+
+      - name: Deploy to Laravel Cloud
+        env:
+          LC_PROJECT_ID: ${{ secrets.LARAVEL_CLOUD_PROJECT_ID }}
+          LC_ENVIRONMENT_NAME: ${{ secrets.LARAVEL_CLOUD_ENVIRONMENT_NAME }}
+        run: |
+          echo "Deploying tag ${{ github.ref_name }} to Laravel Cloud project '${LC_PROJECT_ID}' environment '${LC_ENVIRONMENT_NAME}'..."
+          laravel-cloud deploy "${LC_ENVIRONMENT_NAME}" \
+            --project="${LC_PROJECT_ID}" \
+            --tag="${{ github.ref_name }}" \
+            --no-interaction \
+            # Add '--no-wait' if you don't want the workflow to wait for deployment completion.
+            # Add '--force' if you need to force deployment even if the commit is already deployed.
