@@ -1,6 +1,6 @@
 # Tasks Manager app 
 
-Demo here: https://cloud.laravel.com/alberto-barrago/tasks-manager
+Demo here: https://tasks-manager-main-pnilds.laravel.cloud/
 
 ## Description
 Basic task manger for testing Laravel features.
