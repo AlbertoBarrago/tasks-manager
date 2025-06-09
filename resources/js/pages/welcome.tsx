@@ -10,41 +10,37 @@ export default function Welcome() {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-            <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
-                <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
-                    <nav className="flex items-center justify-end gap-4">
-                        {auth.user ? (
-                            <Link
-                                href={route('dashboard')}
-                                className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                            >
-                                Dashboard
-                            </Link>
-                        ) : (
-                            <>
+            <div className="flex min-h-screen flex-col justify-center bg-[#FDFDFC] px-6 text-[#1b1b18] dark:bg-[#0a0a0a] dark:text-[#EDEDEC]">
+                <main className="flex flex-col-reverse items-center justify-center gap-12 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-24">
+                    <div className="max-w-lg space-y-6">
+                        <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">Organize your work. Stay productive.</h1>
+                        <p className="text-base text-gray-600 dark:text-gray-400">
+                            TaskFlow is a clean, simple task manager that keeps you focused. Log in and take control of your day — one task at a time.
+                        </p>
+                        {!auth.user && (
+                            <div className="flex justify-center gap-4">
+                                <Link
+                                    href={route('register')}
+                                    className="rounded-md bg-[#1b1b18] px-6 py-2 text-white shadow hover:bg-[#333] dark:bg-white dark:text-black dark:hover:bg-[#e5e5e5]"
+                                >
+                                    Get Started
+                                </Link>
                                 <Link
                                     href={route('login')}
-                                    className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
+                                    className="rounded-md border border-[#1b1b18]/30 px-6 py-2 hover:bg-[#1b1b18]/5 dark:border-[#EDEDEC]/30 dark:hover:bg-[#EDEDEC]/10"
                                 >
                                     Log in
                                 </Link>
-                                <Link
-                                    href={route('register')}
-                                    className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                                >
-                                    Register
-                                </Link>
-                            </>
+                            </div>
                         )}
-                    </nav>
-                </header>
-                <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-                    <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
-                      <h1 className="text-3xl text-white m-auto antialiased">Im a nice h1 dude!</h1>
-                        {/*TODO: here add some text*/}
-                    </main>
-                </div>
-                <div className="hidden h-14.5 lg:block"></div>
+                    </div>
+
+                    <div className="w-full max-w-sm lg:max-w-md">
+                        <img src="/images/task-illustration.svg" alt="Task Manager Illustration" className="w-full" />
+                    </div>
+                </main>
+
+                <footer className="mt-16 text-center text-sm text-gray-400 dark:text-gray-600">© 2025 TaskFlow. All rights reserved.</footer>
             </div>
         </>
     );
