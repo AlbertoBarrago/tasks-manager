@@ -1,7 +1,9 @@
-# Example App
+# Tasks Manager app 
+
+Demo here: https://cloud.laravel.com/alberto-barrago/tasks-manager
 
 ## Description
-Simple Laravel env test. 
+Basic task manger for testing Laravel features.
 
 ## Installation
 
