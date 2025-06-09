@@ -3,16 +3,17 @@ import React from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import AuthLayout from '@/layouts/auth-layout';
 import TaskFormFields from '@/components/task-form-fields';
+import { TaskFormData } from '@/pages/tasks/index';
 
 
 
 export default function Create() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm<TaskFormData>({
         title: '',
         description: '',
         type: '',
         status: 'open',
-        due_date: '',
+        due_date: ''
     });
 
     const submit = (e: React.FormEvent) => {
@@ -26,7 +27,7 @@ export default function Create() {
         <AuthLayout title="Add Task" description="Create a new task">
             <Head title="Add Task" />
 
-            <div className="py-12">
+            <div className="py-2">
                 <div className="max-w-2xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 md:p-8">

@@ -11,7 +11,7 @@ export default function Welcome() {
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
             <div className="flex min-h-screen flex-col justify-center bg-[#FDFDFC] px-6 text-[#1b1b18] dark:bg-[#0a0a0a] dark:text-[#EDEDEC]">
-                <main className="flex flex-col-reverse items-center justify-center gap-12 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-24">
+                <main className="flex flex-col-reverse items-center justify-center gap-12 text-center">
                     <div className="max-w-lg space-y-6">
                         <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">Organize your work. Stay productive.</h1>
                         <p className="text-base text-gray-600 dark:text-gray-400">
@@ -36,7 +36,7 @@ export default function Welcome() {
                     </div>
 
                     <div className="w-full max-w-sm lg:max-w-md">
-                        <img src="/images/task-illustration.svg" alt="Task Manager Illustration" className="w-full" />
+                        <img src="https://media.istockphoto.com/id/1492645918/photo/survey-form-concept-businessman-using-laptops-do-online-checklist-surveys-questionnaire-with.jpg?s=612x612&w=0&k=20&c=lqbzWDBLxqRe99kOz2GwfWDRzkVduf2BvUzn1NBGh7Q=" alt="Task Manager Illustration" className="w-full" />
                     </div>
                 </main>
 

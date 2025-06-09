@@ -3,17 +3,11 @@ import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@headlessui/react';
+import { TaskFormData } from '@/pages/tasks';
 
-interface TaskFormData {
-    title: string;
-    description: string;
-    type: string;
-    status: 'open' | 'in_progress' | 'closed';
-    due_date: string;
-}
 
 interface TaskFormFieldsProps {
-    data: TaskFormData; // Changed 'any' to 'TaskFormData' for better type safety
+    data: TaskFormData;
     setData: (field: keyof TaskFormData, value: string | TaskFormData['status']) => void; // More specific value type
     errors: Partial<Record<keyof TaskFormData, string>>;
 }
@@ -23,7 +17,7 @@ export default function TaskFormFields({ data, setData, errors }: TaskFormFields
         <div className="space-y-6">
             <div>
                 <Label htmlFor="title">Title</Label>
-                <Input // Changed from Textarea for a single-line input
+                <Input
                     id="title"
                     name="title"
                     type="text"
@@ -31,7 +25,7 @@ export default function TaskFormFields({ data, setData, errors }: TaskFormFields
                     className="mt-1 block w-full"
                     autoComplete="title"
                     onChange={(e) => setData('title', e.target.value)}
-                    required // Keep if title is always required
+                    required
                 />
                 <InputError message={errors.title} className="mt-2" />
             </div>
@@ -52,7 +46,7 @@ export default function TaskFormFields({ data, setData, errors }: TaskFormFields
 
             <div>
                 <Label htmlFor="type">Type (e.g., work, personal)</Label>
-                <Input // Changed from Textarea
+                <Input
                     id="type"
                     name="type"
                     type="text"

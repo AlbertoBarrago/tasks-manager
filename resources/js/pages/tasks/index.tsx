@@ -16,6 +16,15 @@ interface Task {
     due_date: string | null;
 }
 
+export interface TaskFormData {
+    title: string;
+    description: string;
+    type: string;
+    status: 'open' | 'in_progress' | 'closed';
+    due_date: string;
+    [key: string]: string | 'open' | 'in_progress' | 'closed' | undefined;
+}
+
 interface PaginatedTasks {
     data: Task[];
     links: Array<{ url: string | null; label: string; active: boolean }>;
