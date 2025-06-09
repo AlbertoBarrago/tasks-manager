@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import AuthLayout from '@/layouts/auth-layout';
 import TaskFormFields from '@/components/task-form-fields';

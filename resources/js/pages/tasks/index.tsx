@@ -1,4 +1,3 @@
-import AuthLayout from '@/layouts/auth-layout';
 import { Head, Link, router } from '@inertiajs/react';
 import axios from 'axios';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
@@ -23,7 +22,6 @@ interface PaginatedTasks {
 }
 
 interface IndexProps {
-    auth: any; // Consider defining a more specific type for auth user
     tasks: PaginatedTasks;
     filters: { type_filter?: string; status_filter?: string };
     taskTypes: string[];
