@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -70,6 +71,11 @@ class User extends Authenticatable
         'google_token',
         'google_refresh_token',
     ];
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 
 
     /**
