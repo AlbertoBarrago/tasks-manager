@@ -3,12 +3,12 @@ import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@headlessui/react';
-import { TaskFormData } from '@/pages/tasks';
+import { TaskFormData } from '@/interfaces';
 
 
 interface TaskFormFieldsProps {
     data: TaskFormData;
-    setData: (field: keyof TaskFormData, value: string | TaskFormData['status']) => void; // More specific value type
+    setData: (field: keyof TaskFormData, value: string | TaskFormData['status']) => void;
     errors: Partial<Record<keyof TaskFormData, string>>;
 }
 
