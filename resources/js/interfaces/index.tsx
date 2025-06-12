@@ -19,7 +19,6 @@ export interface TaskFormData {
 
 export interface PaginatedTasks {
     data: Task[];
-    links: Array<{ url: string | null; label: string; active: boolean }>;
 }
 
 export interface IndexProps {
@@ -27,6 +26,21 @@ export interface IndexProps {
     filters: { type_filter?: string; status_filter?: string };
     taskTypes: string[];
     success?: string;
+}
+
+export interface FilterProps {
+   typeFilter: string;
+   setTypeFilter: (e: string) => void;
+   taskTypes: string[];
+   statusFilter: string;
+   setStatusFilter: (e: string) => void;
+   handleFilterChange: () => void;
+}
+
+export interface TaskGridProps {
+    tasks: PaginatedTasks;
+    openEditModal: (task: Task) => void;
+    handleDelete: (taskId: number) => void;
 }
 
 export interface TaskStats {

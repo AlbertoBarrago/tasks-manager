@@ -1,16 +1,16 @@
+import Filter from '@/components/filter';
 import TaskFormModal from '@/components/task-form-modal';
+import TaskGrid from '@/components/task-grid';
+import { IndexProps, Task, TaskStats } from '@/interfaces';
 import AppLayout from '@/layouts/app-layout';
+import { Button } from '@headlessui/react';
 import { Head, Link, router } from '@inertiajs/react';
-import { Button } from '@headlessui/react'
 import axios from 'axios';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { IndexProps, Task, TaskStats } from '@/interfaces';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
-
 
 export default function Index({ tasks, filters, taskTypes, success }: IndexProps) {
     const [typeFilter, setTypeFilter] = useState(filters.type_filter || '');
@@ -37,7 +37,7 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
     };
 
     const handleFormSuccess = () => {
-       console.log('Success')
+        console.log('Success');
     };
 
     useEffect(() => {
@@ -54,13 +54,13 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
             });
 
         const quotes = [
-            "Dream bigger. Do bigger. Conquer.",
+            'Dream bigger. Do bigger. Conquer.',
             "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.",
             "Hustle until your haters ask if you're hiring.",
-            "Be a voice, not an echo.",
-            "Strive for progress, not perfection.",
-            "Turn your wounds into wisdom.",
-            "The future belongs to those who believe in the beauty of their dreams."
+            'Be a voice, not an echo.',
+            'Strive for progress, not perfection.',
+            'Turn your wounds into wisdom.',
+            'The future belongs to those who believe in the beauty of their dreams.',
         ];
         setFunnyQuote(quotes[Math.floor(Math.random() * quotes.length)]);
         setIsHungry(Math.random() < 0.3);
@@ -125,139 +125,22 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
                             {success && <div className="mb-4 rounded bg-green-100 p-4 text-green-700">{success}</div>}
                             <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                                 <h2 className="text-2xl font-semibold">Your Tasks</h2>
-                                <Button onClick={openCreateModal} className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 hover:cursor-pointer">
+                                <Button
+                                    onClick={openCreateModal}
+                                    className="rounded bg-blue-500 px-4 py-2 text-white hover:cursor-pointer hover:bg-blue-600"
+                                >
                                     Add Task
                                 </Button>
                             </div>
-                            <div className="mb-6 rounded-md border p-4 dark:border-gray-700">
-                                <h3 className="mb-4 text-lg font-medium">Filters</h3>
-                                <div className="flex flex-col gap-4 sm:flex-row">
-                                    <div className="flex-grow">
-                                        <label htmlFor="type_filter" className="block text-sm font-medium dark:text-gray-300">
-                                            Type
-                                        </label>
-                                        <select
-                                            id="type_filter"
-                                            value={typeFilter}
-                                            onChange={(e) => setTypeFilter(e.target.value)}
-                                            className="mt-1 block w-full rounded-md border p-2 sm:text-sm dark:border-gray-600 dark:bg-gray-700"
-                                        >
-                                            <option value="">All Types</option>
-                                            {taskTypes.map((type) => (
-                                                <option key={type} value={type}>
-                                                    {type}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div className="flex-grow">
-                                        <label htmlFor="status_filter" className="block text-sm font-medium dark:text-gray-300">
-                                            Status
-                                        </label>
-                                        <select
-                                            id="status_filter"
-                                            value={statusFilter}
-                                            onChange={(e) => setStatusFilter(e.target.value)}
-                                            className="mt-1 block w-full rounded-md border p-2 sm:text-sm dark:border-gray-600 dark:bg-gray-700"
-                                        >
-                                            <option value="">All Statuses</option>
-                                            <option value="open">Open</option>
-                                            <option value="in_progress">In Progress</option>
-                                            <option value="closed">Closed</option>
-                                        </select>
-                                    </div>
-                                    <Button
-                                        onClick={handleFilterChange}
-                                        className="w-auto rounded bg-blue-500 px-4 py-2 text-white hover:bg-indigo-600 h-12 mt-4 hover:cursor-pointer"
-                                    >
-                                        Apply Filters
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="overflow-x-auto">
-                                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                    <thead className="bg-gray-50 dark:bg-gray-700">
-                                        <tr>
-                                            {['Title', 'Type', 'Status', 'Due Date', ''].map((th, i) => (
-                                                <th
-                                                    key={i}
-                                                    className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-300"
-                                                >
-                                                    {th || <span className="sr-only">Actions</span>}
-                                                </th>
-                                            ))}
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                                        {tasks.data.length ? (
-                                            tasks.data.map((task) => (
-                                                <tr key={task.id}>
-                                                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap dark:text-white">{task.title}</td>
-                                                    <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-300">
-                                                        {task.type || '-'}
-                                                    </td>
-                                                    <td className="px-6 py-4 text-sm whitespace-nowrap">
-                                                        <span
-                                                            className={`inline-flex rounded-full px-2 text-xs leading-5 font-semibold ${
-                                                                task.status === 'open'
-                                                                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100'
-                                                                    : task.status === 'in_progress'
-                                                                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100'
-                                                                      : 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
-                                                            }`}
-                                                        >
-                                                            {task.status.replace('_', ' ')}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-300">
-                                                        {task.due_date ? new Date(task.due_date).toLocaleDateString() : '-'}
-                                                    </td>
-                                                    <td className="px-6 py-4 text-right text-sm whitespace-nowrap">
-                                                        <Button
-                                                            onClick={() => openEditModal(task)}
-                                                            className="mr-3 text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200 hover:cursor-pointer"
-                                                        >
-                                                            Edit
-                                                        </Button>
-                                                        <Button
-                                                            onClick={() => handleDelete(task.id)}
-                                                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200 hover:scale-110 hover:cursor-pointer transition-all duration-300 ease-in-out"
-                                                        >
-                                                            🗑️
-                                                        </Button>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                        ) : (
-                                            <tr>
-                                                <td colSpan={5} className="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
-                                                    No tasks found.
-                                                </td>
-                                            </tr>
-                                        )}
-                                    </tbody>
-                                </table>
-                            </div>
-                            {tasks.links.length > 3 && (
-                                <div className="mt-4 -mb-1 flex flex-wrap">
-                                    {tasks.links.map((link, key) =>
-                                        link.url === null ? (
-                                            <div
-                                                key={key}
-                                                className="mr-1 mb-1 rounded border px-4 py-3 text-sm text-gray-400 dark:border-gray-600"
-                                                dangerouslySetInnerHTML={{ __html: link.label }}
-                                            />
-                                        ) : (
-                                            <Link
-                                                key={key}
-                                                href={link.url}
-                                                className={`mr-1 mb-1 rounded border px-4 py-3 text-sm hover:bg-gray-50 focus:border-indigo-500 focus:text-indigo-500 dark:border-gray-600 dark:hover:bg-gray-700 ${link.active ? 'bg-white dark:bg-gray-700' : 'dark:text-gray-300'}`}
-                                                dangerouslySetInnerHTML={{ __html: link.label }}
-                                            />
-                                        ),
-                                    )}
-                                </div>
-                            )}
+                            <Filter
+                                typeFilter={typeFilter}
+                                setTypeFilter={setTypeFilter}
+                                taskTypes={taskTypes}
+                                statusFilter={statusFilter}
+                                setStatusFilter={setStatusFilter}
+                                handleFilterChange={handleFilterChange}
+                            />
+                            <TaskGrid tasks={tasks} openEditModal={openEditModal} handleDelete={handleDelete} />
                         </div>
                     </div>
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
