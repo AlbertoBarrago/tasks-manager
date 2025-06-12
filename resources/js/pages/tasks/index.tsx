@@ -1,6 +1,7 @@
 import TaskFormModal from '@/components/task-form-modal';
 import AppLayout from '@/layouts/app-layout';
 import { Head, Link, router } from '@inertiajs/react';
+import { Button } from '@headlessui/react'
 import axios from 'axios';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import { useEffect, useState } from 'react';
@@ -121,9 +122,9 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
                             {success && <div className="mb-4 rounded bg-green-100 p-4 text-green-700">{success}</div>}
                             <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                                 <h2 className="text-2xl font-semibold">Your Tasks</h2>
-                                <button onClick={openCreateModal} className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+                                <Button onClick={openCreateModal} className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
                                     Add Task
-                                </button>
+                                </Button>
                             </div>
                             <div className="mb-6 rounded-md border p-4 dark:border-gray-700">
                                 <h3 className="mb-4 text-lg font-medium">Filters</h3>
@@ -162,12 +163,12 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
                                             <option value="closed">Closed</option>
                                         </select>
                                     </div>
-                                    <button
+                                    <Button
                                         onClick={handleFilterChange}
-                                        className="w-auto rounded bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600"
+                                        className="w-auto rounded bg-blue-500 px-4 py-2 text-white hover:bg-indigo-600 h-12 mt-4"
                                     >
                                         Apply Filters
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                             <div className="overflow-x-auto">
@@ -209,18 +210,18 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
                                                         {task.due_date ? new Date(task.due_date).toLocaleDateString() : '-'}
                                                     </td>
                                                     <td className="px-6 py-4 text-right text-sm whitespace-nowrap">
-                                                        <button
+                                                        <Button
                                                             onClick={() => openEditModal(task)}
                                                             className="mr-3 text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200"
                                                         >
                                                             Edit
-                                                        </button>
-                                                        <button
+                                                        </Button>
+                                                        <Button
                                                             onClick={() => handleDelete(task.id)}
-                                                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200"
+                                                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200 hover:scale-110"
                                                         >
-                                                            Delete
-                                                        </button>
+                                                            🗑️
+                                                        </Button>
                                                     </td>
                                                 </tr>
                                             ))

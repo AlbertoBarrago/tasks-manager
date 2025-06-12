@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -54,6 +55,9 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function edit(Task $task): InertiaResponse
     {
         $this->authorize('update', $task);
@@ -62,6 +66,9 @@ class TaskController extends Controller
         ]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update(UpdateTaskRequest $request, Task $task): RedirectResponse
     {
         $this->authorize('update', $task);
@@ -70,6 +77,9 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function destroy(Task $task): RedirectResponse
     {
         $this->authorize('delete', $task);
