@@ -54,10 +54,13 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
             });
 
         const quotes = [
-            "I'm not lazy, I'm on energy-saving mode.",
-            'Why did the scarecrow win an award? Because he was outstanding in his field!',
-            'My bed is a magical place where I suddenly remember everything I forgot to do.',
-            'I told my wife she was drawing her eyebrows too high. She seemed surprised.',
+            "Dream bigger. Do bigger. Conquer.",
+            "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.",
+            "Hustle until your haters ask if you're hiring.",
+            "Be a voice, not an echo.",
+            "Strive for progress, not perfection.",
+            "Turn your wounds into wisdom.",
+            "The future belongs to those who believe in the beauty of their dreams."
         ];
         setFunnyQuote(quotes[Math.floor(Math.random() * quotes.length)]);
         setIsHungry(Math.random() < 0.3);
@@ -122,7 +125,7 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
                             {success && <div className="mb-4 rounded bg-green-100 p-4 text-green-700">{success}</div>}
                             <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                                 <h2 className="text-2xl font-semibold">Your Tasks</h2>
-                                <Button onClick={openCreateModal} className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+                                <Button onClick={openCreateModal} className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 hover:cursor-pointer">
                                     Add Task
                                 </Button>
                             </div>
@@ -165,7 +168,7 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
                                     </div>
                                     <Button
                                         onClick={handleFilterChange}
-                                        className="w-auto rounded bg-blue-500 px-4 py-2 text-white hover:bg-indigo-600 h-12 mt-4"
+                                        className="w-auto rounded bg-blue-500 px-4 py-2 text-white hover:bg-indigo-600 h-12 mt-4 hover:cursor-pointer"
                                     >
                                         Apply Filters
                                     </Button>
@@ -212,13 +215,13 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
                                                     <td className="px-6 py-4 text-right text-sm whitespace-nowrap">
                                                         <Button
                                                             onClick={() => openEditModal(task)}
-                                                            className="mr-3 text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200"
+                                                            className="mr-3 text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200 hover:cursor-pointer"
                                                         >
                                                             Edit
                                                         </Button>
                                                         <Button
                                                             onClick={() => handleDelete(task.id)}
-                                                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200 hover:scale-110"
+                                                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200 hover:scale-110 hover:cursor-pointer transition-all duration-300 ease-in-out"
                                                         >
                                                             🗑️
                                                         </Button>
