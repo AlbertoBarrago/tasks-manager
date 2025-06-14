@@ -1,8 +1,8 @@
 import TaskFormFields from '@/components/task-form-fields';
+import { TaskFormData } from '@/interfaces';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import React, { Fragment, useEffect } from 'react';
-import { TaskFormData } from '@/interfaces';
 
 interface Task {
     id: number;
@@ -20,7 +20,7 @@ interface TaskFormModalProps {
     onSuccess?: () => void;
 }
 
-export default function TaskFormModal({ isOpen, onClose, taskToEdit, onSuccess }: TaskFormModalProps) {
+export default function TaskDialog({ isOpen, onClose, taskToEdit, onSuccess }: TaskFormModalProps) {
     const isEditing = !!taskToEdit;
 
     const { data, setData, post, put, processing, errors, reset, clearErrors } = useForm<TaskFormData>({

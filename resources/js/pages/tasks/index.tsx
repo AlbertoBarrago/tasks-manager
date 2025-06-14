@@ -1,5 +1,5 @@
 import Filter from '@/components/filter';
-import TaskFormModal from '@/components/task-form-modal';
+import TaskDialog from '@/components/task-dialog';
 import TaskGrid from '@/components/task-grid';
 import { IndexProps, Task, TaskStats } from '@/interfaces';
 import AppLayout from '@/layouts/app-layout';
@@ -184,7 +184,7 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
                     </div>
                 </div>
             </div>
-            <TaskFormModal isOpen={isModalOpen} onClose={closeModal} taskToEdit={taskToEdit} onSuccess={handleFormSuccess} />
+            <TaskDialog isOpen={isModalOpen} onClose={closeModal} taskToEdit={taskToEdit} onSuccess={handleFormSuccess} />
         </AppLayout>
     );
 }
