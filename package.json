@@ -24,6 +24,7 @@
         "typescript-eslint": "^8.23.0"
     },
     "dependencies": {
+        "@balby/kache": "^0.3.2",
         "@headlessui/react": "^2.2.0",
         "@inertiajs/react": "^2.0.0",
         "@radix-ui/react-avatar": "^1.1.3",

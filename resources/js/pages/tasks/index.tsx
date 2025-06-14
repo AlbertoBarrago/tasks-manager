@@ -4,14 +4,13 @@ import TaskGrid from '@/components/task-grid';
 import { IndexProps, Task, TaskStats } from '@/interfaces';
 import AppLayout from '@/layouts/app-layout';
 import { Button } from '@headlessui/react';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import axios from 'axios';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
 export default function Index({ tasks, filters, taskTypes, success }: IndexProps) {
     const [typeFilter, setTypeFilter] = useState(filters.type_filter || '');
     const [statusFilter, setStatusFilter] = useState(filters.status_filter || '');
@@ -110,7 +109,7 @@ export default function Index({ tasks, filters, taskTypes, success }: IndexProps
     const handleDelete = (taskId: number) => {
         if (confirm('Are you sure you want to delete this task?')) {
             router.delete(route('tasks.destroy', taskId), {
-                // onSuccess callback can be used for feedback
+                // onSuccess do something
             });
         }
     };
